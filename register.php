@@ -224,18 +224,16 @@ require 'csrf.php';
         }
         function validateInputPassword(field) 
         {
+
             var value = $('#' + field).val().trim();
-            // var password_format = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-            if (value.length >= 6) 
+            var password_format = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if (!password_format.test(value)) 
             {
+                showError(field,'Your password must include at least one uppercase letter, a number, and a special character.');
+                return false;
+            } else {
                 hideError(field);
                 return true;
-                
-            } 
-            else 
-            {
-                showError(field, field.capitalize() + 'must be at least 6 characters.');
-                return false;
             }
         }
 
